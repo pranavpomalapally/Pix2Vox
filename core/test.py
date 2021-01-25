@@ -56,7 +56,7 @@ def test_net(cfg,
         test_data_loader = torch.utils.data.DataLoader(dataset=dataset_loader.get_dataset(
             utils.data_loaders.DatasetType.TEST, cfg.CONST.N_VIEWS_RENDERING, test_transforms),
                                                        batch_size=1,
-                                                       num_workers=1,
+                                                       num_workers=0,
                                                        pin_memory=True,
                                                        shuffle=False)
 
@@ -79,8 +79,9 @@ def test_net(cfg,
         encoder.load_state_dict(checkpoint['encoder_state_dict'])
         decoder.load_state_dict(checkpoint['decoder_state_dict'])
 
-        if cfg.NETWORK.USE_REFINER:
-            refiner.load_state_dict(checkpoint['refiner_state_dict'])
+        # if cfg.NETWORK.USE_REFINER:
+        #     refiner.load_state_dict(checkpoint['refiner_state_dict'])
+        refiner.load_state_dict(checkpoint['refiner_state_dict'])
         if cfg.NETWORK.USE_MERGER:
             merger.load_state_dict(checkpoint['merger_state_dict'])
 
@@ -99,9 +100,11 @@ def test_net(cfg,
     refiner.eval()
     merger.eval()
 
+
     for sample_idx, (taxonomy_id, sample_name, rendering_images, ground_truth_volume) in enumerate(test_data_loader):
         taxonomy_id = taxonomy_id[0] if isinstance(taxonomy_id[0], str) else taxonomy_id[0].item()
         sample_name = sample_name[0]
+
 
         with torch.no_grad():
             # Get data from data loader
@@ -118,11 +121,14 @@ def test_net(cfg,
                 generated_volume = torch.mean(generated_volume, dim=1)
             encoder_loss = bce_loss(generated_volume, ground_truth_volume) * 10
 
-            if cfg.NETWORK.USE_REFINER and epoch_idx >= cfg.TRAIN.EPOCH_START_USE_REFINER:
-                generated_volume = refiner(generated_volume)
-                refiner_loss = bce_loss(generated_volume, ground_truth_volume) * 10
-            else:
-                refiner_loss = encoder_loss
+            # if cfg.NETWORK.USE_REFINER and epoch_idx >= cfg.TRAIN.EPOCH_START_USE_REFINER:
+            #     generated_volume = refiner(generated_volume)
+            #     refiner_loss = bce_loss(generated_volume, ground_truth_volume) * 10
+            # else:
+            #     refiner_loss = encoder_loss
+
+            generated_volume = refiner(generated_volume)
+            refiner_loss = bce_loss(generated_volume, ground_truth_volume) * 10
 
             # Append loss and accuracy to average metrics
             encoder_losses.update(encoder_loss.item())

@@ -9,14 +9,15 @@ cfg                                         = __C
 
 #
 # Dataset Config
-#
+# #
 __C.DATASETS                                = edict()
 __C.DATASETS.SHAPENET                       = edict()
 __C.DATASETS.SHAPENET.TAXONOMY_FILE_PATH    = './datasets/ShapeNet.json'
 # __C.DATASETS.SHAPENET.TAXONOMY_FILE_PATH  = './datasets/PascalShapeNet.json'
 __C.DATASETS.SHAPENET.RENDERING_PATH        = '/Users/pranavpomalapally/downloads/ShapeNetRendering/%s/%s/rendering/%02d.png'
-# __C.DATASETS.SHAPENET.RENDERING_PATH      = '/home/hzxie/Datasets/ShapeNet/PascalShapeNetRendering/%s/%s/render_%04d.jpg'
+# __C.DATASETS.SHAPENET.RENDERING_PATH        = '/Users/pranavpomalapally/downloads/custom/%s/%s/rendering/%02d.png'
 __C.DATASETS.SHAPENET.VOXEL_PATH            = '/Users/pranavpomalapally/downloads/ShapeNetVox32/%s/%s/model.binvox'
+# __C.DATASETS.SHAPENET.VOXEL_PATH            = '/Users/pranavpomalapally/downloads/customv/%s/%s/model.binvox'
 __C.DATASETS.PASCAL3D                       = edict()
 __C.DATASETS.PASCAL3D.TAXONOMY_FILE_PATH    = './datasets/Pascal3D.json'
 __C.DATASETS.PASCAL3D.ANNOTATION_PATH       = '/home/hzxie/Datasets/PASCAL3D/Annotations/%s_imagenet/%s.mat'
@@ -27,6 +28,11 @@ __C.DATASETS.PIX3D.TAXONOMY_FILE_PATH       = './datasets/Pix3D.json'
 __C.DATASETS.PIX3D.ANNOTATION_PATH          = '/Users/pranavpomalapally/Downloads/pix3d/pix3d.json'
 __C.DATASETS.PIX3D.RENDERING_PATH           = '/Users/pranavpomalapally/downloads/pix3d/img/%s/%s.%s'
 __C.DATASETS.PIX3D.VOXEL_PATH               = '/Users/pranavpomalapally/downloads/pix3d/model/%s/%s/%s.binvox'
+
+__C.DATASETS.CUSTOM                       	= edict()
+__C.DATASETS.CUSTOM.TAXONOMY_FILE_PATH      = './datasets/Custom.json'
+__C.DATASETS.CUSTOM.RENDERING_PATH          = '/Users/pranavpomalapally/downloads/custom/img/%s.%s'
+__C.DATASETS.CUSTOM.VOXEL_PATH              = '/Users/pranavpomalapally/downloads/custom/model/%s/%s/%s.binvox'
 
 
 
@@ -44,7 +50,7 @@ __C.DATASETS.PIX3D.VOXEL_PATH               = '/Users/pranavpomalapally/download
 # __C.DATASETS.PASCAL3D.VOXEL_PATH            = '/home/hzxie/Datasets/PASCAL3D/CAD/%s/%02d.binvox'
 # __C.DATASETS.PIX3D                          = edict()
 # __C.DATASETS.PIX3D.TAXONOMY_FILE_PATH       = './datasets/Pix3D.json'
-# __C.DATASETS.PIX3D.ANNOTATION_PATH          = '/home/hzxie/Datasets/Pix3D/pix3d.json'
+# __C.DATASETS.PIX3D.ANNOTATION_PATH          = './pix3d.json'
 # __C.DATASETS.PIX3D.RENDERING_PATH           = './pix3d/img/%s/%s.%s'
 # __C.DATASETS.PIX3D.VOXEL_PATH               = './pix3d/model/%s/%s/%s.binvox'
 
